@@ -4,6 +4,7 @@ import { applyOrganizationRls } from "@/db/middleware/rls";
 
 export type PackCheckStatus = "PASS" | "FAIL" | "UNCERTAIN";
 export type PackDecision = "SEAL" | "STOP_AND_FIX" | "UNCERTAIN";
+export type PackRecordStatus = "pending" | "complete" | "failed_open";
 
 export interface PackItem {
   sku: string;
@@ -41,6 +42,7 @@ export interface PackRecord {
   record_id: string;
   unit_id: string;
   organization_id: string;
+  status: PackRecordStatus;
   subject: PackSubject;
   images: string[];
   checks: PackCheck[];
@@ -119,6 +121,11 @@ export const packRecordSchema = new Schema<PackRecordDocument>(
     record_id: { type: String, required: true, unique: true, index: true, trim: true },
     unit_id: { type: String, required: true, index: true, trim: true },
     organization_id: { type: String, required: true, index: true, trim: true },
+    status: {
+      type: String,
+      enum: ["pending", "complete", "failed_open"],
+      required: true,
+    },
     subject: { type: packSubjectSchema, required: true },
     images: { type: [String], required: true, default: [] },
     checks: { type: [packCheckSchema], required: true, default: [] },
