@@ -8,6 +8,7 @@ import { LoadingOverlay } from "./LoadingOverlay";
 type VerificationContext = {
   unit_id: string;
   organization_id: string;
+  station_id: string;
   order_id: string;
   order_lines: Array<{ sku: string; quantity: number }>;
 };

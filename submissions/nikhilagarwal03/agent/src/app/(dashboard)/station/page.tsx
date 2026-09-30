@@ -41,6 +41,7 @@ function CameraViewfinder() {
               verification={{
                 unit_id: "UNIT-0034",
                 organization_id: "org_demo_alpha",
+                station_id: "station_01",
                 order_id: "ORD-DUMMY-50034",
                 order_lines: orderLines.map(({ sku, quantity }) => ({ sku, quantity })),
               }}

@@ -20,6 +20,7 @@ type VerifyRequest = {
   record_id?: string;
   unit_id: string;
   organization_id: string;
+  station_id: string;
   order_id: string;
   order_lines: PackItem[];
   image_url: string;
@@ -62,6 +63,7 @@ function isVerifyRequest(value: unknown): value is VerifyRequest {
   return (
     typeof request.unit_id === "string" &&
     typeof request.organization_id === "string" &&
+    typeof request.station_id === "string" &&
     typeof request.order_id === "string" &&
     typeof request.image_url === "string" &&
     Array.isArray(request.order_lines) &&
@@ -86,7 +88,7 @@ export async function POST(request: Request) {
 
   if (!isVerifyRequest(body)) {
     return NextResponse.json(
-      { error: "unit_id, organization_id, order_id, image_url, and order_lines are required" },
+      { error: "unit_id, organization_id, station_id, order_id, image_url, and order_lines are required" },
       { status: 400 },
     );
   }
@@ -97,6 +99,7 @@ export async function POST(request: Request) {
     record_id: recordId,
     unit_id: body.unit_id,
     organization_id: body.organization_id,
+    station_id: body.station_id,
     subject: {
       order_id: body.order_id,
       order_lines: body.order_lines,

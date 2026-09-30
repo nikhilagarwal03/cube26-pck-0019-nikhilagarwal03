@@ -42,6 +42,7 @@ export interface PackRecord {
   record_id: string;
   unit_id: string;
   organization_id: string;
+  station_id: string;
   status: PackRecordStatus;
   subject: PackSubject;
   images: string[];
@@ -121,6 +122,7 @@ export const packRecordSchema = new Schema<PackRecordDocument>(
     record_id: { type: String, required: true, unique: true, index: true, trim: true },
     unit_id: { type: String, required: true, index: true, trim: true },
     organization_id: { type: String, required: true, index: true, trim: true },
+    station_id: { type: String, required: true, index: true, trim: true },
     status: {
       type: String,
       enum: ["pending", "complete", "failed_open"],
