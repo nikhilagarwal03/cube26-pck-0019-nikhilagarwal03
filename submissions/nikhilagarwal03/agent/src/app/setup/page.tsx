@@ -23,6 +23,7 @@ export default function SetupPage() {
 
     window.localStorage.setItem("organization_id", organization);
     window.localStorage.setItem("station_id", station);
+    window.sessionStorage.setItem("setup_completed", "true");
     router.replace("/");
   }
 

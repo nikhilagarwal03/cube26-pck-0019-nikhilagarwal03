@@ -11,10 +11,11 @@ export default function Home() {
   const [isBound, setIsBound] = useState(false);
 
   useEffect(() => {
+    const setupCompleted = window.sessionStorage.getItem("setup_completed");
     const organizationId = window.localStorage.getItem("organization_id");
     const stationId = window.localStorage.getItem("station_id");
 
-    if (!organizationId || !stationId) {
+    if (!setupCompleted || !organizationId || !stationId) {
       router.replace("/setup");
       return;
     }
@@ -26,7 +27,7 @@ export default function Home() {
   if (!isBound) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-zinc-950 text-zinc-500">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em]">Checking terminal binding...</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em]">Redirecting to terminal setup...</p>
       </main>
     );
   }
@@ -35,11 +36,20 @@ export default function Home() {
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-zinc-950 px-6 py-20 text-zinc-50">
       <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(#27272a_1px,transparent_1px),linear-gradient(90deg,#27272a_1px,transparent_1px)] [background-size:72px_72px]" />
       <div className="relative z-10 w-full max-w-5xl">
-        <header className="mb-12 flex items-center justify-center gap-4">
-          <Logo size={46} />
-          <h1 className="font-mono text-sm font-semibold tracking-[0.24em] text-zinc-100 sm:text-base">
-            PACK_MANAGER // TERMINAL_01
-          </h1>
+        <header className="mb-12 flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <div className="flex items-center gap-4">
+            <Logo size={46} />
+            <h1 className="font-mono text-sm font-semibold tracking-[0.24em] text-zinc-100 sm:text-base">
+              PACK_MANAGER // TERMINAL_01
+            </h1>
+          </div>
+          <Link
+            className="flex items-center gap-2 border border-zinc-800 bg-zinc-900/60 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-wider text-zinc-400 transition hover:border-emerald-500/60 hover:text-emerald-300"
+            href="/setup"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            Device Setup
+          </Link>
         </header>
 
         <nav aria-label="Pack Manager destinations" className="grid grid-cols-1 gap-5 md:grid-cols-2">

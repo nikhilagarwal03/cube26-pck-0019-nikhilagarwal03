@@ -16,6 +16,7 @@ type VerdictDisplayProps = {
   recordId: string;
   organizationId: string;
   operatorId: string;
+  onOverrideSuccess?: (newDecision: "SEAL" | "STOP_AND_FIX", reason: string) => void;
 };
 
 const verdictStyles: Record<Verdict, { border: string; text: string; label: string }> = {
@@ -41,6 +42,7 @@ export function VerdictDisplay({
   recordId,
   organizationId,
   operatorId,
+  onOverrideSuccess,
 }: VerdictDisplayProps) {
   const [newDecision, setNewDecision] = useState<"SEAL" | "STOP_AND_FIX" | null>(null);
   const [reason, setReason] = useState<string | null>(null);
@@ -74,6 +76,7 @@ export function VerdictDisplay({
         throw new Error("Override could not be saved");
       }
       setSaved(true);
+      onOverrideSuccess?.(newDecision, reason);
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : "Override could not be saved");
     } finally {

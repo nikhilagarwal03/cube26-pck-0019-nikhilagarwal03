@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSyncExternalStore } from "react";
 import { Logo } from "@/components/branding/Logo";
 import { DashboardNav } from "@/components/DashboardNav";
 import {
@@ -123,12 +124,20 @@ function PanelTitle({ eyebrow, title, aside }: { eyebrow: string; title: string;
   );
 }
 
+const emptySubscribe = () => () => {};
+
 export default function AnalyticsPage() {
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+
   const presenceErrors = analytics.checks.all_items_present.fail;
   const quantityErrors = analytics.checks.quantities_correct.fail;
 
   return (
-    <main className="grid h-screen overflow-hidden grid-rows-[64px_minmax(0,1fr)] bg-zinc-950 text-zinc-100">
+    <main suppressHydrationWarning className="grid h-screen overflow-hidden grid-rows-[64px_minmax(0,1fr)] bg-zinc-950 text-zinc-100">
       <header className="flex h-16 items-center justify-between border-b border-zinc-800 px-6">
         <div className="flex items-center gap-3">
           <Logo size={30} />
@@ -153,7 +162,7 @@ export default function AnalyticsPage() {
             <span className="border border-zinc-800 px-2 py-1 font-mono text-[9px] uppercase tracking-wider text-zinc-500">Last 24 hours</span>
           </div>
 
-          <section className="flex min-h-[72px] items-center justify-between gap-4 border border-emerald-500/35 bg-emerald-500/5 px-4 py-3" aria-label="Evaluation results">
+          <section suppressHydrationWarning className="flex min-h-[72px] items-center justify-between gap-4 border border-emerald-500/35 bg-emerald-500/5 px-4 py-3" aria-label="Evaluation results">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400">Evaluation Run 2 Results (Verified)</span>
@@ -166,26 +175,30 @@ export default function AnalyticsPage() {
             </Link>
           </section>
 
-          <section className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4" aria-label="Key performance indicators">
+          <section suppressHydrationWarning className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4" aria-label="Key performance indicators">
             <MetricCard accent="bg-emerald-500" detail="33 mis-ships caught in test set" label="Protected Mis-Ships Value" value="$1,815" />
             <MetricCard accent="bg-sky-400" detail="Run 2 benchmark latency" label="Average Inference Latency (ms)" value="1,845 ms" />
             <MetricCard accent="bg-amber-500" detail="8 / 50 severe occlusion routed" label="Global UNCERTAIN Rate (%)" value="16.0%" />
             <MetricCard accent="bg-zinc-400" detail="held-out test fixtures" label="Total Units Verified" value="50" />
           </section>
 
-          <section className="grid grid-cols-1 gap-4 xl:grid-cols-[1.35fr_0.65fr]" aria-label="Operator telemetry">
+          <section suppressHydrationWarning className="grid grid-cols-1 gap-4 xl:grid-cols-[1.35fr_0.65fr]" aria-label="Operator telemetry">
             <article className="h-64 overflow-hidden border border-zinc-800 bg-zinc-900/50">
               <PanelTitle aside="3 evaluators" eyebrow="Operator telemetry" title="Manual Overrides per Operator" />
               <div className="h-[calc(100%-3rem)] px-3 pb-3 pt-2">
-                <ResponsiveContainer height="100%" width="100%">
-                  <BarChart data={analytics.manual_overrides_by_operator} layout="vertical" margin={{ left: 8, right: 12, top: 2, bottom: 2 }}>
-                    <CartesianGrid horizontal={false} stroke="#27272a" />
-                    <XAxis axisLine={false} tick={{ fill: "#71717a", fontSize: 10 }} tickLine={false} type="number" />
-                    <YAxis axisLine={false} dataKey="operator_id" tick={{ fill: "#a1a1aa", fontSize: 10 }} tickLine={false} type="category" width={85} />
-                    <Tooltip contentStyle={{ background: "#18181b", border: "1px solid #3f3f46", color: "#f4f4f5", fontSize: 11 }} cursor={{ fill: "#27272a" }} />
-                    <Bar dataKey="overrides" fill="#f59e0b" maxBarSize={18} radius={[0, 2, 2, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
+                {mounted ? (
+                  <ResponsiveContainer height="100%" width="100%">
+                    <BarChart data={analytics.manual_overrides_by_operator} layout="vertical" margin={{ left: 8, right: 12, top: 2, bottom: 2 }}>
+                      <CartesianGrid horizontal={false} stroke="#27272a" />
+                      <XAxis axisLine={false} tick={{ fill: "#71717a", fontSize: 10 }} tickLine={false} type="number" />
+                      <YAxis axisLine={false} dataKey="operator_id" tick={{ fill: "#a1a1aa", fontSize: 10 }} tickLine={false} type="category" width={85} />
+                      <Tooltip contentStyle={{ background: "#18181b", border: "1px solid #3f3f46", color: "#f4f4f5", fontSize: 11 }} cursor={{ fill: "#27272a" }} />
+                      <Bar dataKey="overrides" fill="#f59e0b" maxBarSize={18} radius={[0, 2, 2, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center font-mono text-xs text-zinc-600">Loading telemetry chart...</div>
+                )}
               </div>
             </article>
 
@@ -210,19 +223,23 @@ export default function AnalyticsPage() {
             </article>
           </section>
 
-          <section className="grid grid-cols-1 gap-4 xl:grid-cols-[0.85fr_1.15fr]" aria-label="Catalog intelligence">
+          <section suppressHydrationWarning className="grid grid-cols-1 gap-4 xl:grid-cols-[0.85fr_1.15fr]" aria-label="Catalog intelligence">
             <article className="h-64 overflow-hidden border border-zinc-800 bg-zinc-900/50">
               <PanelTitle aside="42 flagged conditions" eyebrow="Catalog intelligence" title="Defect Mix" />
               <div className="grid h-[calc(100%-3rem)] grid-cols-[1fr_1fr] items-center px-4">
                 <div className="h-44 min-w-0">
-                  <ResponsiveContainer height="100%" width="100%">
-                    <PieChart>
-                      <Pie data={analytics.defect_types} dataKey="count" cx="50%" cy="50%" innerRadius={42} outerRadius={65} paddingAngle={3} stroke="#18181b" strokeWidth={2}>
-                        {analytics.defect_types.map((entry, index) => <Cell fill={defectColors[index]} key={entry.type} />)}
-                      </Pie>
-                      <Tooltip contentStyle={{ background: "#18181b", border: "1px solid #3f3f46", color: "#f4f4f5", fontSize: 11 }} />
-                    </PieChart>
-                  </ResponsiveContainer>
+                  {mounted ? (
+                    <ResponsiveContainer height="100%" width="100%">
+                      <PieChart>
+                        <Pie data={analytics.defect_types} dataKey="count" cx="50%" cy="50%" innerRadius={42} outerRadius={65} paddingAngle={3} stroke="#18181b" strokeWidth={2}>
+                          {analytics.defect_types.map((entry, index) => <Cell fill={defectColors[index]} key={entry.type} />)}
+                        </Pie>
+                        <Tooltip contentStyle={{ background: "#18181b", border: "1px solid #3f3f46", color: "#f4f4f5", fontSize: 11 }} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center font-mono text-xs text-zinc-600">Loading defect chart...</div>
+                  )}
                 </div>
                 <div className="space-y-2">
                   {analytics.defect_types.map((defect, index) => (
