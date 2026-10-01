@@ -1,10 +1,9 @@
 import type { VisionObservation } from "./index";
 
-const OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
+const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const REQUEST_TIMEOUT_MS = 30_000;
 
-// Set OPENROUTER_MODEL to the vision model selected for the deployment.
-export const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? "<MODEL_PLACEHOLDER>";
+export const GROQ_MODEL = process.env.GROQ_MODEL ?? "qwen/qwen3.8-27b";
 
 export const PACK_VISION_SYSTEM_PROMPT = `You are a cautious outbound packing verifier.
 
@@ -48,14 +47,14 @@ Use status=uncertain whenever the image cannot support a reliable inventory. The
 response describes visual evidence only; do not produce a SEAL or STOP_AND_FIX
 decision here.`;
 
-export type OpenRouterPackRequest = {
+export type VisionPackRequest = {
   imageUrl: string;
   expectedSkus: string[];
   catalogueContext?: string;
   signal?: AbortSignal;
 };
 
-export type OpenRouterVisionResult = {
+export type VisionResult = {
   observations: VisionObservation[];
   decoys: Array<{
     label: string;
@@ -70,7 +69,7 @@ export type OpenRouterVisionResult = {
   reason: string;
 };
 
-type OpenRouterResponse = {
+type GroqResponse = {
   choices?: Array<{
     message?: {
       content?: string;
@@ -78,20 +77,20 @@ type OpenRouterResponse = {
   }>;
 };
 
-function getContent(response: OpenRouterResponse): string {
+function getContent(response: GroqResponse): string {
   const content = response.choices?.[0]?.message?.content;
   if (!content) {
-    throw new Error("OpenRouter returned no vision content");
+    throw new Error("Groq returned no vision content");
   }
   return content;
 }
 
 export async function analyzePackImage(
-  request: OpenRouterPackRequest,
-): Promise<OpenRouterVisionResult> {
-  const apiKey = process.env.OPENROUTER_API_KEY;
+  request: VisionPackRequest,
+): Promise<VisionResult> {
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    throw new Error("OPENROUTER_API_KEY is not configured");
+    throw new Error("GROQ_API_KEY is not configured");
   }
 
   const controller = new AbortController();
@@ -101,20 +100,14 @@ export async function analyzePackImage(
     : controller.signal;
 
   try {
-    const response = await fetch(OPENROUTER_API_URL, {
+    const response = await fetch(GROQ_API_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        ...(process.env.OPENROUTER_HTTP_REFERER
-          ? { "HTTP-Referer": process.env.OPENROUTER_HTTP_REFERER }
-          : {}),
-        ...(process.env.OPENROUTER_APP_NAME
-          ? { "X-Title": process.env.OPENROUTER_APP_NAME }
-          : {}),
       },
       body: JSON.stringify({
-        model: OPENROUTER_MODEL,
+        model: GROQ_MODEL,
         messages: [
           { role: "system", content: PACK_VISION_SYSTEM_PROMPT },
           {
@@ -138,11 +131,11 @@ export async function analyzePackImage(
 
     if (!response.ok) {
       const details = await response.text();
-      throw new Error(`OpenRouter request failed (${response.status}): ${details}`);
+      throw new Error(`Groq request failed (${response.status}): ${details}`);
     }
 
-    const payload = (await response.json()) as OpenRouterResponse;
-    return JSON.parse(getContent(payload)) as OpenRouterVisionResult;
+    const payload = (await response.json()) as GroqResponse;
+    return JSON.parse(getContent(payload)) as VisionResult;
   } finally {
     clearTimeout(timeout);
   }

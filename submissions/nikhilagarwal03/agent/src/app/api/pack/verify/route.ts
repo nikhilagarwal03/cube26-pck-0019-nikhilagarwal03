@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 import { connectToDatabase } from "@/db/connect";
 import { reconcilePack, type ReconciliationResult } from "@/lib/reconciliation/engine";
-import { analyzePackImage } from "@/lib/vision/openrouter";
+import { analyzePackImage } from "@/lib/vision/groq";
 import {
   PackRecordModel,
   type PackCheck,

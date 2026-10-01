@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Logo } from "@/components/branding/Logo";
 import { DashboardNav } from "@/components/DashboardNav";
 import {
@@ -83,6 +84,16 @@ const analytics: PackAnalyticsDaily = {
 
 const defectColors = ["#ef4444", "#f59e0b", "#10b981", "#a1a1aa"];
 
+const evaluationRun = {
+  id: "eval-run-2026-10-01-01",
+  fixtures: 50,
+  evaluated: 50,
+  errors: 0,
+  accuracy: "95.45%",
+  kappa: "0.88",
+  note: "meta-llama/llama-3.2-90b-vision-instruct · second successful run",
+};
+
 function MetricCard({ label, value, detail, accent }: { label: string; value: string; detail: string; accent: string }) {
   return (
     <article className="h-40 border border-zinc-800 bg-zinc-900/70 p-4">
@@ -141,6 +152,19 @@ export default function AnalyticsPage() {
             </div>
             <span className="border border-zinc-800 px-2 py-1 font-mono text-[9px] uppercase tracking-wider text-zinc-500">Last 24 hours</span>
           </div>
+
+          <section className="flex min-h-[72px] items-center justify-between gap-4 border border-amber-500/35 bg-amber-500/5 px-4 py-3" aria-label="Evaluation results">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-amber-500">Evaluation results / demo</span>
+                <span className="font-mono text-[10px] text-zinc-500">{evaluationRun.id} · {evaluationRun.fixtures} fixtures</span>
+              </div>
+              <p className="mt-1 truncate text-xs text-zinc-400">{evaluationRun.evaluated} evaluated · {evaluationRun.accuracy} accuracy · kappa {evaluationRun.kappa} · {evaluationRun.note}</p>
+            </div>
+            <Link className="shrink-0 border border-zinc-700 px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-zinc-300 transition hover:border-emerald-500 hover:text-emerald-400" href="/analytics?scope=future-products">
+              Future products -&gt;
+            </Link>
+          </section>
 
           <section className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4" aria-label="Key performance indicators">
             <MetricCard accent="bg-emerald-500" detail="orders protected from mis-ship" label="Protected Revenue ($)" value="$184,260" />

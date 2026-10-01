@@ -1,4 +1,4 @@
-import type { OpenRouterVisionResult } from "@/lib/vision/openrouter";
+import type { VisionResult } from "@/lib/vision/groq";
 
 export type ExpectedOrderLine = {
   sku: string;
@@ -7,7 +7,7 @@ export type ExpectedOrderLine = {
 
 export type ReconciliationInput = {
   order_lines: readonly ExpectedOrderLine[];
-  extracted: OpenRouterVisionResult;
+  extracted: VisionResult;
 };
 
 export type QuantityMismatch = {

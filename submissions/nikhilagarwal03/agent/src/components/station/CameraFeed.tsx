@@ -23,6 +23,7 @@ type CameraState = "starting" | "ready" | "denied";
 export function CameraFeed({ verification, onResult }: CameraFeedProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [cameraState, setCameraState] = useState<CameraState>("starting");
+  const [facingMode, setFacingMode] = useState<"environment" | "user">("environment");
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -42,7 +43,7 @@ export function CameraFeed({ verification, onResult }: CameraFeedProps) {
         stream = await navigator.mediaDevices.getUserMedia({
           audio: false,
           video: {
-            facingMode: { ideal: "environment" },
+            facingMode: { ideal: facingMode },
             height: { ideal: 2160 },
             width: { ideal: 3840 },
           },
@@ -67,7 +68,14 @@ export function CameraFeed({ verification, onResult }: CameraFeedProps) {
       isMounted = false;
       stream?.getTracks().forEach((track) => track.stop());
     };
-  }, []);
+  }, [facingMode]);
+
+  function toggleCamera() {
+    setCapturedImage(null);
+    setCameraError(null);
+    setCameraState("starting");
+    setFacingMode((current) => (current === "environment" ? "user" : "environment"));
+  }
 
   async function captureFrame() {
     const video = videoRef.current;
@@ -134,6 +142,17 @@ export function CameraFeed({ verification, onResult }: CameraFeedProps) {
         />
       )}
       <div className="pointer-events-none absolute inset-[7%] border border-emerald-500/65" />
+
+      <button
+        aria-label={`Switch to ${facingMode === "environment" ? "front" : "back"} camera`}
+        className="absolute right-4 top-4 z-10 flex h-12 items-center gap-2 border border-zinc-500 bg-zinc-950/80 px-3 font-mono text-[10px] uppercase tracking-wider text-zinc-200 backdrop-blur transition hover:border-emerald-400 hover:text-emerald-300"
+        onClick={toggleCamera}
+        title="Switch camera"
+        type="button"
+      >
+        <span className="font-bold leading-none">SWAP</span>
+        {facingMode === "environment" ? "Back camera" : "Front camera"}
+      </button>
 
       {cameraState === "starting" && (
         <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/90">

@@ -1,0 +1,754 @@
+{
+  "run_id": "run_1",
+  "summary": {
+    "total_runs": 50,
+    "evaluated_runs": 17,
+    "error_count": 33,
+    "true_positives": 3,
+    "true_negatives": 8,
+    "false_positives": 0,
+    "false_negatives": 6,
+    "uncertain_count": 13,
+    "overall_accuracy_percent": "64.71%",
+    "false_positive_rate_percent": "0.00%",
+    "false_negative_rate_percent": "66.67%",
+    "all_items_present_accuracy_percent": "70.00%",
+    "quantities_correct_accuracy_percent": "60.00%",
+    "metric_definition": "TP/TN/FP/FN treat STOP_AND_FIX as the positive operational class; overall accuracy requires exact verdict equality."
+  },
+  "results": [
+    {
+      "fixture_id": "1.a",
+      "category": "Bath",
+      "ground_truth": {
+        "final_verdict": "PASS",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "PASS",
+      "all_items_present": true,
+      "quantities_correct": true,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "1.b",
+      "category": "Bath",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": false
+    },
+    {
+      "fixture_id": "1.c",
+      "category": "Bath",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 5901, Requested 2502. Please try again in 12.025714285s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "1.d",
+      "category": "Bath",
+      "ground_truth": {
+        "final_verdict": "UNCERTAIN",
+        "all_items_present": null,
+        "quantities_correct": null,
+        "occlusion_state": "SEVERE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 4792, Requested 2502. Please try again in 2.52s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "2.a",
+      "category": "Bath",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": false,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (400): {\"error\":{\"message\":\"failed to retrieve media: received status code: 404\",\"type\":\"invalid_request_error\"}}\n"
+    },
+    {
+      "fixture_id": "2.b",
+      "category": "Bath",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": false,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 5780, Requested 2502. Please try again in 10.988571428s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "2.c",
+      "category": "Bath",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 4694, Requested 2502. Please try again in 1.68s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "2.d",
+      "category": "Bath",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": false
+    },
+    {
+      "fixture_id": "3.a",
+      "category": "Apparel & Hardgoods",
+      "ground_truth": {
+        "final_verdict": "PASS",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 5744, Requested 2510. Please try again in 10.748571428s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "3.b",
+      "category": "Apparel & Hardgoods",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5326, Requested 2908. Please try again in 1.755s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "3.c",
+      "category": "Apparel & Hardgoods",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": false
+    },
+    {
+      "fixture_id": "3.d",
+      "category": "Apparel & Hardgoods",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": false,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6755, Requested 2906. Please try again in 12.4575s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "3.e",
+      "category": "Apparel & Hardgoods",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 4826, Requested 2510. Please try again in 2.88s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "3.f",
+      "category": "Apparel & Hardgoods",
+      "ground_truth": {
+        "final_verdict": "UNCERTAIN",
+        "all_items_present": null,
+        "quantities_correct": null,
+        "occlusion_state": "SEVERE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "4.a",
+      "category": "Grocery",
+      "ground_truth": {
+        "final_verdict": "PASS",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6764, Requested 2907. Please try again in 12.5325s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "4.b",
+      "category": "Grocery",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5526, Requested 2907. Please try again in 3.2475s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "4.c",
+      "category": "Grocery",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": false,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "STOP_AND_FIX",
+      "all_items_present": true,
+      "quantities_correct": false,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "4.d",
+      "category": "Grocery",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6769, Requested 2907. Please try again in 12.57s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "4.e",
+      "category": "Grocery",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5518, Requested 2905. Please try again in 3.1725s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "4.f",
+      "category": "Grocery",
+      "ground_truth": {
+        "final_verdict": "UNCERTAIN",
+        "all_items_present": null,
+        "quantities_correct": null,
+        "occlusion_state": "SEVERE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": true,
+      "quantities_correct": false,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "5.a",
+      "category": "Apparel",
+      "ground_truth": {
+        "final_verdict": "PASS",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 5924, Requested 2504. Please try again in 12.239999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "5.b",
+      "category": "Apparel",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 4808, Requested 2504. Please try again in 2.674285714s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "5.c",
+      "category": "Apparel",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": false,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "STOP_AND_FIX",
+      "all_items_present": true,
+      "quantities_correct": false,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "5.d",
+      "category": "Apparel",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6771, Requested 2902. Please try again in 12.5475s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "5.e",
+      "category": "Apparel",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 4843, Requested 2504. Please try again in 2.974285714s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "5.f",
+      "category": "Apparel",
+      "ground_truth": {
+        "final_verdict": "UNCERTAIN",
+        "all_items_present": null,
+        "quantities_correct": null,
+        "occlusion_state": "SEVERE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "6.a",
+      "category": "Media",
+      "ground_truth": {
+        "final_verdict": "PASS",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6770, Requested 2892. Please try again in 12.465s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "6.b",
+      "category": "Media",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5535, Requested 2894. Please try again in 3.2175s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "6.c",
+      "category": "Media",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": false,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": false
+    },
+    {
+      "fixture_id": "6.d",
+      "category": "Media",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 5926, Requested 2496. Please try again in 12.188571428s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "6.e",
+      "category": "Media",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5533, Requested 2894. Please try again in 3.2025s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "6.f",
+      "category": "Media",
+      "ground_truth": {
+        "final_verdict": "UNCERTAIN",
+        "all_items_present": null,
+        "quantities_correct": null,
+        "occlusion_state": "SEVERE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "7.a",
+      "category": "Tools",
+      "ground_truth": {
+        "final_verdict": "PASS",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6632, Requested 2897. Please try again in 11.4675s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "7.b",
+      "category": "Tools",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 4706, Requested 2499. Please try again in 1.757142857s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "7.c",
+      "category": "Tools",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": false,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "STOP_AND_FIX",
+      "all_items_present": true,
+      "quantities_correct": false,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "7.d",
+      "category": "Tools",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 5898, Requested 2499. Please try again in 11.974285714s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "7.e",
+      "category": "Tools",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5498, Requested 2897. Please try again in 2.9625s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "7.f",
+      "category": "Tools",
+      "ground_truth": {
+        "final_verdict": "UNCERTAIN",
+        "all_items_present": null,
+        "quantities_correct": null,
+        "occlusion_state": "SEVERE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "8.a",
+      "category": "Cosmetics",
+      "ground_truth": {
+        "final_verdict": "PASS",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6768, Requested 2903. Please try again in 12.5325s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "8.b",
+      "category": "Cosmetics",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5529, Requested 2903. Please try again in 3.24s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "8.c",
+      "category": "Cosmetics",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": false
+    },
+    {
+      "fixture_id": "8.d",
+      "category": "Cosmetics",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 5922, Requested 2507. Please try again in 12.248571428s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "8.e",
+      "category": "Cosmetics",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 4840, Requested 2507. Please try again in 2.974285714s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "8.f",
+      "category": "Cosmetics",
+      "ground_truth": {
+        "final_verdict": "UNCERTAIN",
+        "all_items_present": null,
+        "quantities_correct": null,
+        "occlusion_state": "SEVERE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": true
+    },
+    {
+      "fixture_id": "9.a",
+      "category": "Stationery",
+      "ground_truth": {
+        "final_verdict": "PASS",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 5927, Requested 2510. Please try again in 12.317142857s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "9.b",
+      "category": "Stationery",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5466, Requested 2906. Please try again in 2.79s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "9.c",
+      "category": "Stationery",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": false,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": false
+    },
+    {
+      "fixture_id": "9.d",
+      "category": "Stationery",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": false,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6771, Requested 2908. Please try again in 12.5925s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "9.e",
+      "category": "Stationery",
+      "ground_truth": {
+        "final_verdict": "STOP_AND_FIX",
+        "all_items_present": true,
+        "quantities_correct": true,
+        "occlusion_state": "NONE"
+      },
+      "ai_verdict": "ERROR",
+      "all_items_present": null,
+      "quantities_correct": null,
+      "verdict_match": false,
+      "error": "Groq request failed (429): {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.8-27b` in organization `org_01m3mzr786e1krc454bqww93zr` service tier `on_demand` on input tokens per minute (ITPM): Limit 7000, Used 4840, Requested 2510. Please try again in 3s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+    },
+    {
+      "fixture_id": "9.f",
+      "category": "Stationery",
+      "ground_truth": {
+        "final_verdict": "UNCERTAIN",
+        "all_items_present": null,
+        "quantities_correct": null,
+        "occlusion_state": "SEVERE"
+      },
+      "ai_verdict": "UNCERTAIN",
+      "all_items_present": false,
+      "quantities_correct": false,
+      "verdict_match": true
+    }
+  ]
+}
