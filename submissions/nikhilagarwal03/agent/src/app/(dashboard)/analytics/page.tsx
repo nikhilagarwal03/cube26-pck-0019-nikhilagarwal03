@@ -47,42 +47,42 @@ type PackAnalyticsDaily = {
 const analytics: PackAnalyticsDaily = {
   date: "2026-10-01",
   organization_id: "org_demo_alpha",
-  protected_revenue_usd: 184260,
-  average_inference_latency_ms: 842,
-  uncertain_rate_percent: 7.4,
-  total_units_verified: 1284,
+  protected_revenue_usd: 1815,
+  average_inference_latency_ms: 1845,
+  uncertain_rate_percent: 16.0,
+  total_units_verified: 50,
   checks: {
-    all_items_present: { pass: 1178, fail: 73, uncertain: 33 },
-    quantities_correct: { pass: 1198, fail: 52, uncertain: 34 },
+    all_items_present: { pass: 26, fail: 16, uncertain: 8 },
+    quantities_correct: { pass: 34, fail: 8, uncertain: 8 },
   },
   manual_overrides_by_operator: [
-    { operator_id: "OP_AMIRA", overrides: 18 },
-    { operator_id: "OP_BEN", overrides: 12 },
-    { operator_id: "OP_CHEN", overrides: 9 },
-    { operator_id: "OP_DANA", overrides: 7 },
-    { operator_id: "OP_FATIMA", overrides: 5 },
+    { operator_id: "Labeler B", overrides: 2 },
+    { operator_id: "AI Model", overrides: 1 },
+    { operator_id: "Labeler A", overrides: 1 },
   ],
   operator_error_catch_rate: [
-    { operator_id: "OP_AMIRA", caught: 41, eligible: 46, rate_percent: 89.1 },
-    { operator_id: "OP_BEN", caught: 34, eligible: 39, rate_percent: 87.2 },
-    { operator_id: "OP_CHEN", caught: 29, eligible: 35, rate_percent: 82.9 },
-    { operator_id: "OP_DANA", caught: 24, eligible: 31, rate_percent: 77.4 },
+    { operator_id: "Consensus GT", caught: 34, eligible: 34, rate_percent: 100 },
+    { operator_id: "Labeler A", caught: 34, eligible: 34, rate_percent: 100 },
+    { operator_id: "AI (Llama 3.2)", caught: 33, eligible: 34, rate_percent: 97.1 },
+    { operator_id: "Labeler B", caught: 33, eligible: 34, rate_percent: 97.1 },
   ],
   defect_types: [
-    { type: "Missing", count: 38 },
-    { type: "Quantity Mismatch", count: 31 },
-    { type: "Extra Item", count: 24 },
-    { type: "Occluded", count: 33 },
+    { type: "Missing Item", count: 8 },
+    { type: "Quantity Mismatch", count: 9 },
+    { type: "Variant / Wrong Item", count: 9 },
+    { type: "Extra Foreign Item", count: 8 },
+    { type: "Severe Occlusion", count: 8 },
   ],
   high_risk_skus: [
-    { sku: "SKU-CANDLE-3", stop_conditions: 19, units_seen: 86 },
-    { sku: "SKU-TOWEL-BLU", stop_conditions: 14, units_seen: 112 },
-    { sku: "SKU-PUZZLE-500", stop_conditions: 11, units_seen: 94 },
-    { sku: "SKU-MUG-11", stop_conditions: 9, units_seen: 138 },
+    { sku: "SKU-BATH-TOWEL-LIGHT-BLUE", stop_conditions: 6, units_seen: 16 },
+    { sku: "SKU-BATH-SOAP-LAVENDER", stop_conditions: 6, units_seen: 8 },
+    { sku: "SKU-APPAREL-TSHIRT-WHITE", stop_conditions: 4, units_seen: 12 },
+    { sku: "SKU-HARDGOOD-MUG-BLACK", stop_conditions: 4, units_seen: 6 },
+    { sku: "SKU-GROCERY-BASIL-JAR", stop_conditions: 4, units_seen: 12 },
   ],
 };
 
-const defectColors = ["#ef4444", "#f59e0b", "#10b981", "#a1a1aa"];
+const defectColors = ["#ef4444", "#f59e0b", "#3b82f6", "#10b981", "#a1a1aa"];
 
 const evaluationRun = {
   id: "eval-run-2026-10-01-01",
@@ -153,10 +153,10 @@ export default function AnalyticsPage() {
             <span className="border border-zinc-800 px-2 py-1 font-mono text-[9px] uppercase tracking-wider text-zinc-500">Last 24 hours</span>
           </div>
 
-          <section className="flex min-h-[72px] items-center justify-between gap-4 border border-amber-500/35 bg-amber-500/5 px-4 py-3" aria-label="Evaluation results">
+          <section className="flex min-h-[72px] items-center justify-between gap-4 border border-emerald-500/35 bg-emerald-500/5 px-4 py-3" aria-label="Evaluation results">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-amber-500">Evaluation results / demo</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400">Evaluation Run 2 Results (Verified)</span>
                 <span className="font-mono text-[10px] text-zinc-500">{evaluationRun.id} · {evaluationRun.fixtures} fixtures</span>
               </div>
               <p className="mt-1 truncate text-xs text-zinc-400">{evaluationRun.evaluated} evaluated · {evaluationRun.accuracy} accuracy · kappa {evaluationRun.kappa} · {evaluationRun.note}</p>
@@ -167,21 +167,21 @@ export default function AnalyticsPage() {
           </section>
 
           <section className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4" aria-label="Key performance indicators">
-            <MetricCard accent="bg-emerald-500" detail="orders protected from mis-ship" label="Protected Revenue ($)" value="$184,260" />
-            <MetricCard accent="bg-sky-400" detail="p50 request / response" label="Average Inference Latency (ms)" value="842 ms" />
-            <MetricCard accent="bg-amber-500" detail="evidence sent to review" label="Global UNCERTAIN Rate (%)" value="7.4%" />
-            <MetricCard accent="bg-zinc-400" detail="across merchant + 3PL" label="Total Units Verified" value="1,284" />
+            <MetricCard accent="bg-emerald-500" detail="33 mis-ships caught in test set" label="Protected Mis-Ships Value" value="$1,815" />
+            <MetricCard accent="bg-sky-400" detail="Run 2 benchmark latency" label="Average Inference Latency (ms)" value="1,845 ms" />
+            <MetricCard accent="bg-amber-500" detail="8 / 50 severe occlusion routed" label="Global UNCERTAIN Rate (%)" value="16.0%" />
+            <MetricCard accent="bg-zinc-400" detail="held-out test fixtures" label="Total Units Verified" value="50" />
           </section>
 
           <section className="grid grid-cols-1 gap-4 xl:grid-cols-[1.35fr_0.65fr]" aria-label="Operator telemetry">
             <article className="h-64 overflow-hidden border border-zinc-800 bg-zinc-900/50">
-              <PanelTitle aside="5 operators" eyebrow="Operator telemetry" title="Manual Overrides per Operator" />
+              <PanelTitle aside="3 evaluators" eyebrow="Operator telemetry" title="Manual Overrides per Operator" />
               <div className="h-[calc(100%-3rem)] px-3 pb-3 pt-2">
                 <ResponsiveContainer height="100%" width="100%">
                   <BarChart data={analytics.manual_overrides_by_operator} layout="vertical" margin={{ left: 8, right: 12, top: 2, bottom: 2 }}>
                     <CartesianGrid horizontal={false} stroke="#27272a" />
                     <XAxis axisLine={false} tick={{ fill: "#71717a", fontSize: 10 }} tickLine={false} type="number" />
-                    <YAxis axisLine={false} dataKey="operator_id" tick={{ fill: "#a1a1aa", fontSize: 10 }} tickLine={false} type="category" width={72} />
+                    <YAxis axisLine={false} dataKey="operator_id" tick={{ fill: "#a1a1aa", fontSize: 10 }} tickLine={false} type="category" width={85} />
                     <Tooltip contentStyle={{ background: "#18181b", border: "1px solid #3f3f46", color: "#f4f4f5", fontSize: 11 }} cursor={{ fill: "#27272a" }} />
                     <Bar dataKey="overrides" fill="#f59e0b" maxBarSize={18} radius={[0, 2, 2, 0]} />
                   </BarChart>
@@ -212,7 +212,7 @@ export default function AnalyticsPage() {
 
           <section className="grid grid-cols-1 gap-4 xl:grid-cols-[0.85fr_1.15fr]" aria-label="Catalog intelligence">
             <article className="h-64 overflow-hidden border border-zinc-800 bg-zinc-900/50">
-              <PanelTitle aside="126 total defects" eyebrow="Catalog intelligence" title="Defect Mix" />
+              <PanelTitle aside="42 flagged conditions" eyebrow="Catalog intelligence" title="Defect Mix" />
               <div className="grid h-[calc(100%-3rem)] grid-cols-[1fr_1fr] items-center px-4">
                 <div className="h-44 min-w-0">
                   <ResponsiveContainer height="100%" width="100%">

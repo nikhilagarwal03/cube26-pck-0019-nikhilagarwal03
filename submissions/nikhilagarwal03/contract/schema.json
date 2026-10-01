@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cube-buildathon.org/schemas/03-pack-manager-record.json",
+  "title": "PackManagerEvidenceRecord",
+  "description": "Standard evidence record produced by Step 03 (Pack Manager) at box seal. Consumed downstream by Step 04 (Returns Manager) and Step 05 (Recovery Manager) via unit_id.",
+  "type": "object",
+  "required": [
+    "record_id",
+    "unit_id",
+    "organization_id",
+    "station_id",
+    "status",
+    "subject",
+    "images",
+    "checks",
+    "outcome",
+    "overrides",
+    "content_hash"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "pattern": "^PCK-[a-zA-Z0-9_-]+$",
+      "description": "Unique identifier for this pack event, prefixed with PCK-."
+    },
+    "unit_id": {
+      "type": "string",
+      "pattern": "^UNIT-\\d{4}$",
+      "description": "Cross-stage join key (UNIT-0001 to UNIT-0100) tracking the physical unit across Receiving, Prep, Pack, Returns, and Recovery."
+    },
+    "organization_id": {
+      "type": "string",
+      "description": "Multi-tenant tenant identifier (e.g. org_demo_alpha, org_demo_bravo)."
+    },
+    "station_id": {
+      "type": "string",
+      "description": "Identifier of the packing station or terminal where the box was packed."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "complete", "failed_open"],
+      "description": "Execution status of the verification. 'failed_open' indicates model timeout or outage where capture is preserved and operator is not blocked."
+    },
+    "subject": {
+      "type": "object",
+      "required": ["order_id", "order_lines", "observed_in_box"],
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "description": "The customer order identifier."
+        },
+        "order_lines": {
+          "type": "array",
+          "description": "Expected SKUs and quantities ordered by the buyer.",
+          "items": {
+            "type": "object",
+            "required": ["sku", "quantity"],
+            "properties": {
+              "sku": { "type": "string" },
+              "quantity": { "type": "integer", "minimum": 1 }
+            }
+          }
+        },
+        "observed_in_box": {
+          "type": "array",
+          "description": "SKUs and quantities physically extracted by the vision agent from the open box photograph.",
+          "items": {
+            "type": "object",
+            "required": ["sku", "quantity"],
+            "properties": {
+              "sku": { "type": "string" },
+              "quantity": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "images": {
+      "type": "array",
+      "description": "Array of URIs or presigned storage paths representing the open-box visual evidence before seal.",
+      "items": { "type": "string" }
+    },
+    "checks": {
+      "type": "array",
+      "description": "Line-by-line verification checks comparing expected order lines to visual evidence.",
+      "items": {
+        "type": "object",
+        "required": ["sku", "expected_quantity", "status"],
+        "properties": {
+          "sku": { "type": "string" },
+          "expected_quantity": { "type": "integer", "minimum": 1 },
+          "observed_quantity": { "type": ["integer", "null"] },
+          "status": {
+            "type": "string",
+            "enum": ["PASS", "FAIL", "UNCERTAIN"]
+          },
+          "issue": { "type": "string" }
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["decision", "decided_by"],
+      "properties": {
+        "decision": {
+          "type": "string",
+          "enum": ["SEAL", "STOP_AND_FIX", "UNCERTAIN"],
+          "description": "Final operational judgment. SEAL authorizes closing the box; STOP_AND_FIX halts packing; UNCERTAIN flags for human review."
+        },
+        "decided_by": {
+          "type": "string",
+          "description": "Agent or operator identifier who produced the decision."
+        }
+      }
+    },
+    "overrides": {
+      "type": "array",
+      "description": "Audit log of any human operator manual overrides applied to the decision.",
+      "items": {
+        "type": "object",
+        "required": ["original_decision", "new_decision", "reason", "overridden_by", "overridden_at"],
+        "properties": {
+          "original_decision": {
+            "type": "string",
+            "enum": ["SEAL", "STOP_AND_FIX", "UNCERTAIN"]
+          },
+          "new_decision": {
+            "type": "string",
+            "enum": ["SEAL", "STOP_AND_FIX", "UNCERTAIN"]
+          },
+          "reason": { "type": "string" },
+          "overridden_by": { "type": "string" },
+          "overridden_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 cryptographic digest of the record content for tamper evidence across the chain."
+    }
+  }
+}
+
