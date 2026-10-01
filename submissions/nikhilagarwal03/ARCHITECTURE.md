@@ -267,9 +267,17 @@ $$V = \begin{cases}
 Evidence generated at box seal must withstand scrutiny in legal disputes, marketplace chargebacks, and carrier claims:
 
 ### 6.1 SHA-256 Content Digest
+
 Every record computes a canonical digest over its normalized payload:
 
-$$\text{content\_hash} = \text{SHA-256}\Big(\text{JSON.stringify}\big(\{ \text{unit\_id}, \text{subject}, \text{checks}, \text{outcome}, \text{overrides} \}\big)\Big)$$
+$$
+\mathrm{SHA\text{-}256}
+\left(
+\mathrm{JSON.stringify}(\text{canonical payload})
+\right)
+$$
+
+The canonical payload contains `unit_id`, `subject`, `checks`, `outcome`, and `overrides`.
 
 If an operator applies an override, the override record (including previous verdict, new verdict, reason chip, operator ID, and UTC timestamp) is appended to `overrides[]`, and the `content_hash` is recomputed. Any modification to visual records or checks immediately invalidates the digest.
 
