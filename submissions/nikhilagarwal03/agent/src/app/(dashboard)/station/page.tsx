@@ -1,4 +1,5 @@
 import { Logo } from "@/components/branding/Logo";
+import { DashboardNav } from "@/components/DashboardNav";
 import { CameraFeed } from "@/components/station/CameraFeed";
 import { VerdictDisplay } from "@/components/station/VerdictDisplay";
 
@@ -69,11 +70,13 @@ export default function StationPage() {
             <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-500">Outbound verification / station 03</p>
           </div>
         </div>
-        <div className="flex items-center gap-5 font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
-          <span>Operator <strong className="font-medium text-zinc-300">OP_AMIRA</strong></span>
-          <span className="hidden h-4 w-px bg-zinc-800 sm:block" />
-          <span className="hidden sm:inline">Queue <strong className="font-medium text-zinc-300">04</strong></span>
-          <span className="h-2 w-2 rounded-full bg-emerald-500" title="Station online" />
+        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+          <DashboardNav active="station" />
+          <div className="hidden items-center gap-5 sm:flex">
+            <span>Operator <strong className="font-medium text-zinc-300">OP_AMIRA</strong></span>
+            <span className="h-4 w-px bg-zinc-800" />
+            <span>Queue <strong className="font-medium text-zinc-300">04</strong></span>
+          </div>
         </div>
       </header>
 

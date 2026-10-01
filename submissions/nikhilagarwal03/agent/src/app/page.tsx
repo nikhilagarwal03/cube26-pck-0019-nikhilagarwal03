@@ -1,8 +1,36 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { Logo } from "@/components/branding/Logo";
 
 export default function Home() {
+  const router = useRouter();
+  const [isBound, setIsBound] = useState(false);
+
+  useEffect(() => {
+    const organizationId = window.localStorage.getItem("organization_id");
+    const stationId = window.localStorage.getItem("station_id");
+
+    if (!organizationId || !stationId) {
+      router.replace("/setup");
+      return;
+    }
+
+    const readyTask = window.setTimeout(() => setIsBound(true), 0);
+    return () => window.clearTimeout(readyTask);
+  }, [router]);
+
+  if (!isBound) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-zinc-950 text-zinc-500">
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em]">Checking terminal binding...</p>
+      </main>
+    );
+  }
+
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-zinc-950 px-6 py-20 text-zinc-50">
       <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(#27272a_1px,transparent_1px),linear-gradient(90deg,#27272a_1px,transparent_1px)] [background-size:72px_72px]" />

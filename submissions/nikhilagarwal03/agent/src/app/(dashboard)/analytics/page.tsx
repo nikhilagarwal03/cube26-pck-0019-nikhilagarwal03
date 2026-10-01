@@ -1,6 +1,7 @@
 "use client";
 
 import { Logo } from "@/components/branding/Logo";
+import { DashboardNav } from "@/components/DashboardNav";
 import {
   Bar,
   BarChart,
@@ -125,9 +126,9 @@ export default function AnalyticsPage() {
             <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-600">Operations intelligence · daily brief</p>
           </div>
         </div>
-        <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+          <DashboardNav active="analytics" />
           <span>{analytics.organization_id}</span>
-          <span className="h-2 w-2 bg-emerald-500" title="Data current" />
         </div>
       </header>
 

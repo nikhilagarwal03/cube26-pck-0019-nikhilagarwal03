@@ -7,8 +7,8 @@ import { Logo } from "@/components/branding/Logo";
 
 export default function SetupPage() {
   const router = useRouter();
-  const [organizationId, setOrganizationId] = useState("");
-  const [stationId, setStationId] = useState("");
+  const [organizationId, setOrganizationId] = useState("org_demo_alpha");
+  const [stationId, setStationId] = useState("station_01");
   const [error, setError] = useState<string | null>(null);
 
   function bindDevice(event: FormEvent<HTMLFormElement>) {
@@ -42,6 +42,11 @@ export default function SetupPage() {
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-500">Initialize station context</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-100">Bind this device to a warehouse.</h1>
           <p className="mt-2 text-sm leading-6 text-zinc-400">These identifiers stay on this terminal and are used to associate pack evidence with the correct operation.</p>
+        </div>
+
+        <div className="mb-5 border border-emerald-500/25 bg-emerald-500/5 px-4 py-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-500">Demo credentials loaded</p>
+          <p className="mt-1 font-mono text-[11px] text-zinc-400">Use the prefilled demo organization and station to enter the prototype.</p>
         </div>
 
         <form className="space-y-5" onSubmit={bindDevice}>
